@@ -7,6 +7,12 @@ class DBHelper:
         def setUserHelper(self, userHelper):
             self.userHelper = userHelper
 
+        def setValarantHelper(self, valarantHelper):
+            self.valarantHelper = valarantHelper
+
+        def getUserIdByDiscordTag(self, discordTag):
+            self.userHelper.getUserIdByDiscordTag(discordTag)
+
         def getAllFromTable(self, message):
             tokenizedMessage = message.content.split(' ')
             if (len(tokenizedMessage) < 2):
