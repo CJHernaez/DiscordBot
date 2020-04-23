@@ -2,6 +2,8 @@ import discord
 
 client = discord.Client()
 
+f= open("userToken.txt","r")
+
 users = {}
 users['Jarren'] = 'procrastinise#2594'
 users['CJ'] = 'Prophecies#9660'
@@ -26,4 +28,4 @@ async def on_message(message):
     if ('hello') in message.content:
         await message.channel.send('Hello, {0.author}!'.format(message))
 
-client.run('NzAyNjY5Mzk5ODEwNzY4OTA5.XqDlIA.uDi-4hzEeWjofbTOQ0f0tGZe9YE')
+client.run(f.read())
