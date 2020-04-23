@@ -25,11 +25,25 @@ class UserRepository:
 
         return dict
 
-    def getUserByNickname(self, nicknameToMatch):
+    def getDiscordTagByNickname(self, nicknameToMatch):
             for (id, name, discId, nickname) in self.datasource.values():
                 if nickname.lower() == nicknameToMatch.lower():
                     return name+'#'+ str(discId)
-            return 'User Not Found'
+            return 'Nickname ' + nicknameToMatch  + ' Not Found'
+
+
+    def getUserIdByDiscordTag(self, discordTag):
+        tokenizedTag = discordTag.split('#')
+        for (id, name, discId, nickname) in self.datasource.values():
+            if name.lower() == tokenizedTag[0].lower() and discId == int(tokenizedTag[1]):
+                return id
+        return 'Discord Tag' + discordTag + ' Not Found'
+
+    def getUserIdByNickname(self, nicknameToMatch):
+        for (id, name, discId, nickname) in self.datasource.values():
+            if nickname.lower() == nicknameToMatch.lower():
+                return id
+        return 'Nickname ' + nicknameToMatch + ' Not Found'
 
 
     def add(self, discordName, discordId, nickname):
