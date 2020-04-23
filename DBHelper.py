@@ -39,3 +39,27 @@ class DBHelper:
                 return 'Failed to add user:' + str(splitTag[0])
 
             self.conn.commit()
+
+        def refreshUsers(self):
+            dict = {}
+            cur = self.conn.cursor()
+
+            try:
+                cur.execute("SELECT * FROM USERS")
+            except sqlite3.OperationalError as e:
+                return e
+
+            rows = cur.fetchall()
+
+            for row in rows:
+                dict[str(row[1]) + '#' + str(row[2])] = (row[0], row[1], row[2], row[3])
+
+            return dict
+
+
+        def getUsers (self, users):
+            stringbuilder = ''
+            for discordTag, (userID, name, discordId, nickname) in users.items():
+                stringbuilder = stringbuilder + str(userID) + ' : ' + name + ' : ' + str(discordId) + ' : ' + discordTag + '\n'
+
+            return stringbuilder
